@@ -44,7 +44,6 @@ func (s *SourceDir) LoadObjects(source string, o seekret.LoadOptions) ([]models.
 	firstPath := true
 
 	filepath.Walk(source, func(path string, fi os.FileInfo, err error) error {
-
 		if fi.IsDir() {
 			if strings.HasPrefix(filepath.Base(path), ".") && !opt.Hidden {
 				return filepath.SkipDir
@@ -69,6 +68,8 @@ func (s *SourceDir) LoadObjects(source string, o seekret.LoadOptions) ([]models.
 				o := models.NewObject(path, content)
 		
 				objectList = append(objectList, *o)
+
+				f.Close()
 			}
 		}
 
