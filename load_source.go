@@ -1,6 +1,7 @@
 package sourcedir 
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -23,14 +24,14 @@ type SourceDirLoadOptions struct {
 func prepareDirLoadOptions(o seekret.LoadOptions) SourceDirLoadOptions {
 	opt := SourceDirLoadOptions{
 		Hidden:    false,
-		Recursive: true,
+		Recursive: false,
 	}
 
 	if hidden, ok := o["hidden"].(bool); ok {
 		opt.Hidden = hidden
 	}
 	if recursive, ok := o["recursive"].(bool); ok {
-		opt.Hidden = recursive
+		opt.Recursive = recursive
 	}
 
 	return opt
