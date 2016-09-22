@@ -37,15 +37,21 @@ func prepareDirLoadOptions(o seekret.LoadOptions) SourceDirLoadOptions {
 	return opt
 }
 
-func (s *SourceDir) LoadObjects(source string, o seekret.LoadOptions) ([]models.Object, error) {
+func (s *SourceDir) LoadObjects(source string, opta seekret.LoadOptions) ([]models.Object, error) {
 	var objectList []models.Object
 
-	opt := prepareDirLoadOptions(o)
+	opt := prepareDirLoadOptions(opta)
+
+	fmt.Println(source)
 
 	firstPath := true
 
 	filepath.Walk(source, func(path string, fi os.FileInfo, err error) error {
 		if fi.IsDir() {
+			if firstPath {
+				firstPath = false
+				return nil
+			}
 			if strings.HasPrefix(filepath.Base(path), ".") && !opt.Hidden {
 				return filepath.SkipDir
 			}
@@ -53,7 +59,6 @@ func (s *SourceDir) LoadObjects(source string, o seekret.LoadOptions) ([]models.
 			if !firstPath && !opt.Recursive {
 				return filepath.SkipDir
 			}
-			firstPath = false
 		} else {
 			if !strings.HasPrefix(filepath.Base(path), ".") || (strings.HasPrefix(filepath.Base(path), ".")  && opt.Hidden) {
 				f, err := os.Open(path)
