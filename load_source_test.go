@@ -26,7 +26,7 @@ func TestLoadObjectsFromDirectoryWithHiddenFilesReturnsNoContent(t *testing.T) {
 	sourceDir := SourceDir{}
 	loadOptions := seekret.LoadOptions{}
 
-	objectList, err := sourceDir.LoadObjects("./fixtures/dir_with_hidden_files", loadOptions)
+	objectList, err := sourceDir.LoadObjects("./testdata/dir_with_hidden_files", loadOptions)
 
 	assert.Nil(t, err, "Error should be nil")
 	assert.Empty(t, objectList, "ObjectList should be empty")
@@ -36,7 +36,7 @@ func TestLoadObjectsFromDirectoryWithHiddenFilesReturnsContentIfHiddenOptionIsSe
 	sourceDir := SourceDir{}
 	loadOptions := seekret.LoadOptions{"hidden": true}
 
-	objectList, err := sourceDir.LoadObjects("./fixtures/dir_with_hidden_files", loadOptions)
+	objectList, err := sourceDir.LoadObjects("./testdata/dir_with_hidden_files", loadOptions)
 
 	assert.Nil(t, err, "Error should be nil")
 	assert.NotEmpty(t, objectList, "ObjectList should not be empty")
@@ -47,7 +47,7 @@ func TestLoadObjectsFromDirectoryWithTwoFilesReturnsTwoObjects(t *testing.T) {
 	sourceDir := SourceDir{}
 	loadOptions := seekret.LoadOptions{}
 
-	objectList, err := sourceDir.LoadObjects("./fixtures/dir_with_two_files", loadOptions)
+	objectList, err := sourceDir.LoadObjects("./testdata/dir_with_two_files", loadOptions)
 
 	assert.Nil(t, err, "Error should be nil")
 	assert.NotEmpty(t, objectList, "ObjectList should not be empty")
@@ -58,7 +58,7 @@ func TestLoadObjectsFromTwoLevelDirectoryThatContainsTwoFilesReturnsTwoObjectsIf
 	sourceDir := SourceDir{}
 	loadOptions := seekret.LoadOptions{"recursive": true}
 
-	objectList, err := sourceDir.LoadObjects("./fixtures/recursive_dir_with_two_files", loadOptions)
+	objectList, err := sourceDir.LoadObjects("./testdata/recursive_dir_with_two_files", loadOptions)
 
 	assert.Nil(t, err, "Error should be nil")
 	assert.NotEmpty(t, objectList, "ObjectList should not be empty")
@@ -69,7 +69,7 @@ func TestLoadObjectsFromInvalidDirectoryShouldReturnAnError(t *testing.T) {
 	sourceDir := SourceDir{}
 	loadOptions := seekret.LoadOptions{}
 
-	objectList, err := sourceDir.LoadObjects("./fixtures/invalid", loadOptions)
+	objectList, err := sourceDir.LoadObjects("./testdata/invalid", loadOptions)
 
 	assert.NotNil(t, err, "Error should be nil")
 	assert.Empty(t, objectList, "ObjectList should be empty")

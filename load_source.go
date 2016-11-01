@@ -1,7 +1,6 @@
 package sourcedir
 
 import (
-	"fmt"
 	"github.com/apuigsech/seekret"
 	"github.com/apuigsech/seekret/models"
 	"io/ioutil"
