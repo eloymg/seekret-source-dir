@@ -1,7 +1,6 @@
 package sourcedir 
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -12,6 +11,10 @@ import (
 
 var (
 	SourceTypeDir = &SourceDir{}
+)
+
+const (
+	Type = "seekret-source-dir"
 )
 
 type SourceDir struct{}
@@ -42,8 +45,6 @@ func (s *SourceDir) LoadObjects(source string, opta seekret.LoadOptions) ([]mode
 
 	opt := prepareDirLoadOptions(opta)
 
-	fmt.Println(source)
-
 	firstPath := true
 
 	filepath.Walk(source, func(path string, fi os.FileInfo, err error) error {
@@ -71,7 +72,7 @@ func (s *SourceDir) LoadObjects(source string, opta seekret.LoadOptions) ([]mode
 					return err
 				}
 
-				o := models.NewObject(path, content)
+				o := models.NewObject(path, Type, "file-content", content)
 		
 				objectList = append(objectList, *o)
 
