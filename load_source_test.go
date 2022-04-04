@@ -1,7 +1,7 @@
 package sourcedir
 
 import (
-	"github.com/apuigsech/seekret"
+	"github.com/eloymg/seekret"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"os"

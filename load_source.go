@@ -1,12 +1,13 @@
 package sourcedir
 
 import (
-	"github.com/apuigsech/seekret"
-	"github.com/apuigsech/seekret/models"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/eloymg/seekret"
+	"github.com/eloymg/seekret/models"
 )
 
 var (
@@ -77,7 +78,7 @@ func (s *SourceDir) LoadObjects(source string, opta seekret.LoadOptions) ([]mode
 				}
 
 				o := models.NewObject(path, Type, "file-content", content)
-		
+
 				objectList = append(objectList, *o)
 
 				f.Close()
