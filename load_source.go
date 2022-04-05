@@ -53,7 +53,7 @@ func (s *SourceDir) LoadObjects(source string, opta seekret.LoadOptions) ([]mode
 			return err
 		}
 
-		if fi.IsDir() {
+		if fi.IsDir() || fi.Mode()&os.ModeSymlink == os.ModeSymlink {
 			if firstPath {
 				firstPath = false
 				return nil
